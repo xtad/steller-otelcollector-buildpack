@@ -19,5 +19,5 @@ fi
 
 echo "Unzip Otel Collector..."
 mkdir $BUILD_DIR/otelcollector
-tar -xzf $CACHE_DIR/otelcol-contrib_0.47.0_linux_amd64.tar.gz --strip 1 -C $BUILD_DIR/otelcollector
+tar -xzf $CACHE_DIR/otelcol-contrib_0.47.0_linux_amd64.tar.gz -C $BUILD_DIR/otelcollector
 echo "...done."
