@@ -1,0 +1,23 @@
+#!/bin/bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+
+echo 'Build and Compile Otel Collector'
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+OTELCOLLECTOR_URL=https://github.com/open-telemetry/opentelemetry-collector-releases/releases/download/v0.47.0/otelcol-contrib_0.47.0_linux_amd64.tar.gz
+
+mkdir -p $CACHE_DIR
+
+if [[ -f "$CACHE_DIR/otelcol-contrib_0.47.0_linux_amd64.tar.gz" ]]; then
+    echo "Otel Collector package already detected in cache, skipping download."
+else
+    echo "Downloading Otel Collector into $CACHE_DIR ..."
+    curl --silent --location $OTELCOLLECTOR_URL -o $CACHE_DIR/otelcol-contrib_0.47.0_linux_amd64.tar.gz
+    echo "...done."
+fi
+
+echo "Unzip Otel Collector..."
+mkdir $BUILD_DIR/otelcollector
+tar -xzf $CACHE_DIR/otelcol-contrib_0.47.0_linux_amd64.tar.gz --strip 1 -C $BUILD_DIR/otelcollector
+echo "...done."
